@@ -1,0 +1,10 @@
+# config.yaml
+name: my-app
+
+version: 0.1.0
+
+functions:
+  - name: expectation_tester
+  - name: blob_storage_service
+  - name: kubernetes_service
+  - name: cosmos_service
