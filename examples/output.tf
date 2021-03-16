@@ -9,7 +9,3 @@ output "app_id" {
 output "function_app" {
   value = module.function.azurerm_function_app
 }
-
-output "sas_url_query_string" {
-  value = module.function.sas_url_query_string
-}

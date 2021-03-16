@@ -5,7 +5,7 @@ resource "azurerm_application_insights" "appinsight" {
   location            = var.rg_location
   resource_group_name = var.rg_name
   application_type    = var.appinsight_type
-  retention_in_days   = var.appinsight_retention
+  retention_in_days   = var.appinsight_retention_in_days
 
   tags = merge(local.shared_tags)
 }

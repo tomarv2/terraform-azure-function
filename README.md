@@ -94,14 +94,11 @@ tf -cloud azure destroy
 module "function" {
   source = "../"
 
-  deploy_function = true
-
   subscription_id = var.subscription_id
   tenant_id       = var.tenant_id
   client_id       = var.client_id
   client_secret   = var.client_secret
 
-  email                         = "demo@demo.com"
   rg_name                       = "demo_rg"
   stg_account_key               = "1234567890A=="
   stg_account                   = "demostorage"

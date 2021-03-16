@@ -19,8 +19,6 @@ resource "azurerm_function_app" "func_app" {
     APPINSIGHTS_INSTRUMENTATIONKEY = join("", azurerm_application_insights.appinsight.*.instrumentation_key)
     FUNCTIONS_EXTENSION_VERSION    = var.function_extension_version
     FUNCTIONS_WORKER_RUNTIME       = var.function_worker_runtime
-    # WEBSITE_CONTENTAZUREFILECONNECTIONSTRING    = azurerm_storage_account.prod.primary_connection_string
-    # WEBSITE_CONTENTSHARE                        = var.storage_account_name
     PYTHONDONTWRITEBYTECODE  = var.python_dont_write_byte_code
     WEBSITE_RUN_FROM_PACKAGE = var.website_run_from_package
   }
