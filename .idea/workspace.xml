@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6b992a28-fa95-4a40-96fe-ec2b90e2477f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/archive.tf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/example.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appinsight.tf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/function.tf" beforeDir="false" afterPath="$PROJECT_DIR$/function.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/locals.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/output.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/serviceplan.tf" beforeDir="false" afterPath="$PROJECT_DIR$/serviceplan.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/versions.tf" beforeDir="false" afterPath="$PROJECT_DIR$/versions.tf" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1onpSoA69p2nhmDEzi14wLHA5NB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ACTIVE_CLOUD_PROJECT_ACCOUNT" value="varun.tomar@databricks.com" />
+    <property name="ACTIVE_CLOUD_PROJECT_ID" value="security-269000" />
+    <property name="ACTIVE_CLOUD_PROJECT_NAME" value="dev-security" />
+    <property name="ACTIVE_CLOUD_PROJECT_NUMBER" value="273335848198" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/examples/test.tf" />
+    <property name="com.google.cloudcode.ide_session_index" value="20210401_0000" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/examples" />
+      <recent name="$PROJECT_DIR$/example" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6b992a28-fa95-4a40-96fe-ec2b90e2477f" name="Default Changelist" comment="" />
+      <created>1613932211216</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1613932211216</updated>
+      <workItem from="1613932212541" duration="767000" />
+      <workItem from="1615572828899" duration="1334000" />
+      <workItem from="1615662725299" duration="3537000" />
+      <workItem from="1615747347817" duration="1546000" />
+      <workItem from="1615749060419" duration="2984000" />
+      <workItem from="1615951902967" duration="10270000" />
+      <workItem from="1617289910559" duration="1653000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

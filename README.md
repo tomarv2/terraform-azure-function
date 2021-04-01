@@ -17,8 +17,6 @@
 
 # Terraform module to create [Azure Functions](https://registry.terraform.io/modules/tomarv2/functions/azure/latest)
 
-####
-
 > :arrow_right:  Terraform module for [AWS Lambda](https://registry.terraform.io/modules/tomarv2/lambda/aws/latest)
 
 > :arrow_right:  Terraform module for [Google CloudFunction](https://registry.terraform.io/modules/tomarv2/cloudfunction/google/latest)
@@ -27,7 +25,7 @@
 ## Versions
 
 - Module tested for Terraform 0.14.
-- Azure provider version [2.48.0](https://registry.terraform.io/providers/hashicorp/azurerm/latest)
+- Azure provider version [2.51.0](https://registry.terraform.io/providers/hashicorp/azurerm/latest)
 - `main` branch: Provider versions not pinned to keep up with Terraform releases
 - `tags` releases: Tags are pinned with versions (use <a href="https://github.com/tomarv2/terraform-azure-functions/tags" alt="GitHub tag">
         <img src="https://img.shields.io/github/v/tag/tomarv2/terraform-azure-functions" /></a> in your releases)
@@ -61,17 +59,17 @@ export ARM_ACCESS_KEY=xxxxxxxxxx # Output of remote_state.sh
 
 - Run and verify the output before deploying:
 ```
-tf -cloud azure plan
+tf -cloud azure plan -var='teamid=foo' -var='prjid=bar'
 ```
 
 - Run below to deploy:
 ```
-tf -cloud azure apply
+tf -cloud azure apply -var='teamid=foo' -var='prjid=bar'
 ```
 
 - Run below to destroy:
 ```
-tf -cloud azure destroy
+tf -cloud azure destroy -var='teamid=foo' -var='prjid=bar'
 ```
 
 
@@ -88,12 +86,12 @@ tf -cloud azure destroy
 >
 > For more information refer to [Terraform documentation](https://www.terraform.io/docs/language/values/variables.html)
 
-##### Function Only
+#### Function Only
 
 ```
 module "function" {
-  source = "../"
-
+  source = "git::git@github.com:tomarv2/terraform-azure-functions.git?ref=v0.0.1"
+        
   subscription_id = var.subscription_id
   tenant_id       = var.tenant_id
   client_id       = var.client_id

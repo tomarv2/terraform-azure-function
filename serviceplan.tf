@@ -6,6 +6,7 @@ resource "azurerm_app_service_plan" "service_plan" {
   resource_group_name = var.rg_name
   kind                = var.service_plan_kind
   reserved            = var.service_plan_reserved
+  tags                = merge(local.shared_tags)
 
   sku {
     tier = var.service_plan_tier

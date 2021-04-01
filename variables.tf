@@ -12,21 +12,12 @@ variable "rg_name" {
 
 variable "rg_location" {
   description = "region"
-  default     = "centralus"
+  default     = "westus"
 }
 
 variable "service_plan_kind" {
   default     = "FunctionApp"
   description = "for Consumption Plan"
-}
-
-variable "appinsight_retention_in_days" {
-  default     = 30
-  description = "app insight retention in days"
-}
-
-variable "appinsight_type" {
-  default = "other"
 }
 
 variable "function_os_type" {
@@ -89,20 +80,6 @@ variable "function_https_only" {
   default = false
 }
 
-variable "site_config_always_on" {
-  type    = bool
-  default = false
-}
-
-variable "use_32_bit_worker_process" {
-  type    = bool
-  default = false
-}
-
-variable "python_dont_write_byte_code" {
-  default = 1
-}
-
 variable "subscription_id" {}
 
 variable "client_id" {}
@@ -111,14 +88,11 @@ variable "client_secret" {}
 
 variable "tenant_id" {}
 
+variable "storage_account_name" {
+  description = "storage account name"
+}
 
-variable "website_run_from_package" {}
-
-variable "stg_connection_string_for_sas" {}
-
-variable "stg_account" {}
-
-variable "stg_account_key" {}
+variable "storage_account_access_key" {}
 
 variable "deploy_function" {
   description = "feature flag, true or false"
@@ -126,19 +100,7 @@ variable "deploy_function" {
   type        = bool
 }
 
-variable "deploy_app_insights" {
-  description = "feature flag, true or false"
-  default     = true
-  type        = bool
-}
-
 variable "deploy_service_plan" {
-  description = "feature flag, true or false"
-  default     = true
-  type        = bool
-}
-
-variable "deploy_sas" {
   description = "feature flag, true or false"
   default     = true
   type        = bool
@@ -152,6 +114,17 @@ variable "function_app_name" {
   default = null
 }
 
-variable "app_insights_name" {
-  default = null
+variable "storage_account_container_name" {}
+
+variable "source_file" {}
+
+variable "output_file_path" {}
+
+variable "archive_type" {
+  default = "zip"
+}
+
+variable "app_settings" {
+  default     = {}
+  description = "Application settings to insert on creating the function app. Following updates will be ignored, and has to be set manually. Updates done on application deploy or in portal will not affect terraform state file."
 }
