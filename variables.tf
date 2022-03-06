@@ -1,130 +1,144 @@
 variable "teamid" {
-  description = "(Required) Name of the team/group e.g. devops, dataengineering. Should not be changed after running 'tf apply'"
+  description = "Name of the team/group e.g. devops, dataengineering. Should not be changed after running 'tf apply'"
+  type        = string
 }
 
 variable "prjid" {
-  description = "(Required) Name of the project/stack e.g: mystack, nifieks, demoaci. Should not be changed after running 'tf apply'"
+  description = "Name of the project/stack e.g: mystack, nifieks, demoaci. Should not be changed after running 'tf apply'"
+  type        = string
 }
 
-variable "rg_name" {
-  description = "Resource Group name"
-}
-
-variable "rg_location" {
-  description = "region"
-  default     = "westus"
+variable "resource_group_name" {
+  description = "Name of the resource group"
+  type        = string
 }
 
 variable "service_plan_kind" {
   default     = "FunctionApp"
-  description = "for Consumption Plan"
+  description = "Service plan kind"
+  type        = string
 }
 
 variable "function_os_type" {
-  default = "linux"
+  description = "Operating System of the function"
+  default     = "linux"
+  type        = string
 }
 
 variable "function_version" {
-  default = "~3"
-}
-
-variable "linux_fx_version" {
-  default     = "PYTHON|3.8"
-  description = "DOCKER|docker_image:docker_image_tag"
+  description = "Function version"
+  default     = "~3"
+  type        = string
 }
 
 variable "identity_type" {
-  default = "SystemAssigned"
+  description = "MSI Identity type"
+  default     = "SystemAssigned"
+  type        = string
 }
 
 variable "service_plan_tier" {
   default     = "Dynamic"
   description = "for Consumption Plan"
+  type        = string
 }
 
 variable "service_plan_size" {
-  default = "Y1"
-}
-
-variable "function_extension_version" {
-  default = "~3"
-}
-
-variable "function_worker_runtime" {
-  default = "python"
-}
-
-variable "stg_connection" {
-  type    = bool
-  default = true
+  description = "Service plan size"
+  default     = "Y1"
+  type        = string
 }
 
 variable "service_plan_reserved" {
+  description = "Service plan reserved, false for windows"
   type        = bool
   default     = true
-  description = "false for windows"
+
 }
 
 variable "function_enabled" {
-  type    = bool
-  default = true
+  description = "Function enabled"
+  type        = bool
+  default     = true
 }
 
 variable "function_enable_logging" {
-  type    = bool
-  default = true
+  description = "Function enable logging"
+  type        = bool
+  default     = true
 }
 
 variable "function_https_only" {
-  type    = bool
-  default = false
+  description = "Function https only"
+  type        = bool
+  default     = false
 }
-
-variable "subscription_id" {}
-
-variable "client_id" {}
-
-variable "client_secret" {}
-
-variable "tenant_id" {}
 
 variable "storage_account_name" {
-  description = "storage account name"
+  description = "Storage account name"
+  type        = string
 }
 
-variable "storage_account_access_key" {}
+variable "storage_account_access_key" {
+  description = "Storage account access key"
+  type        = string
+}
 
 variable "deploy_function" {
-  description = "feature flag, true or false"
+  description = "Feature flag, true or false"
   default     = true
   type        = bool
 }
 
 variable "deploy_service_plan" {
-  description = "feature flag, true or false"
+  description = "Feature flag, true or false"
   default     = true
   type        = bool
 }
 
 variable "service_plan_name" {
-  default = null
+  description = "Service plan name"
+  default     = null
+  type        = string
 }
 
 variable "function_app_name" {
-  default = null
+  description = "Function app name"
+  default     = null
+  type        = string
 }
 
-variable "storage_account_container_name" {}
+variable "location" {
+  description = " The location/region where the resource is created"
+  default     = "westus2"
+  type        = string
+}
 
-variable "source_file" {}
-
-variable "output_file_path" {}
+variable "extra_tags" {
+  description = "Additional tags to associate"
+  type        = map(string)
+  default     = {}
+}
 
 variable "archive_type" {
-  default = "zip"
+  description = "Archive type"
+  default     = "zip"
+  type        = string
 }
 
-variable "app_settings" {
-  default     = {}
-  description = "Application settings to insert on creating the function app. Following updates will be ignored, and has to be set manually. Updates done on application deploy or in portal will not affect terraform state file."
+variable "source_dir" {
+  description = "Input directory path on local machine to zip"
+  #default     = null
+  type = string
+}
+
+variable "output_path" {
+  description = "Output file path on local machine to deploy to lambda"
+  type        = string
+}
+
+variable "exclude_files" {
+  description = "File(s) to exclude in directory from zipping"
+  default     = null
+  type        = list(any)
 }

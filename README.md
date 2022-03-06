@@ -1,6 +1,6 @@
 <p align="center">
-    <a href="https://github.com/tomarv2/terraform-azure-functions/actions/workflows/security_scans.yml" alt="Security Scans">
-        <img src="https://github.com/tomarv2/terraform-azure-functions/actions/workflows/security_scans.yml/badge.svg?branch=main" /></a>
+    <a href="https://github.com/tomarv2/terraform-azure-functions/actions/workflows/pre-commit.yml" alt="Pre Commit">
+        <img src="https://github.com/tomarv2/terraform-azure-functions/actions/workflows/pre-commit.yml/badge.svg?branch=main" /></a>
     <a href="https://www.apache.org/licenses/LICENSE-2.0" alt="license">
         <img src="https://img.shields.io/github/license/tomarv2/terraform-azure-functions" /></a>
     <a href="https://github.com/tomarv2/terraform-azure-functions/tags" alt="GitHub tag">
@@ -9,13 +9,11 @@
         <img src="https://img.shields.io/github/commit-activity/m/tomarv2/terraform-azure-functions" /></a>
     <a href="https://stackoverflow.com/users/6679867/tomarv2" alt="Stack Exchange reputation">
         <img src="https://img.shields.io/stackexchange/stackoverflow/r/6679867"></a>
-    <a href="https://discord.gg/XH975bzN" alt="chat on Discord">
-        <img src="https://img.shields.io/discord/813961944443912223?logo=discord"></a>
     <a href="https://twitter.com/intent/follow?screen_name=varuntomar2019" alt="follow on Twitter">
         <img src="https://img.shields.io/twitter/follow/varuntomar2019?style=social&logo=twitter"></a>
 </p>
 
-# Terraform module to create [Azure Functions](https://registry.terraform.io/modules/tomarv2/functions/azure/latest)
+# Terraform module for [Azure Functions](https://registry.terraform.io/modules/tomarv2/functions/azure/latest)
 
 > :arrow_right:  Terraform module for [AWS Lambda](https://registry.terraform.io/modules/tomarv2/lambda/aws/latest)
 
@@ -24,80 +22,85 @@
 
 ## Versions
 
-- Module tested for Terraform 0.14.
-- Azure provider version [2.51.0](https://registry.terraform.io/providers/hashicorp/azurerm/latest)
+- Module tested for Terraform 1.0.1.
+- Azure provider version [2.98.0](https://registry.terraform.io/providers/hashicorp/azurerm/latest)
 - `main` branch: Provider versions not pinned to keep up with Terraform releases
 - `tags` releases: Tags are pinned with versions (use <a href="https://github.com/tomarv2/terraform-azure-functions/tags" alt="GitHub tag">
         <img src="https://img.shields.io/github/v/tag/tomarv2/terraform-azure-functions" /></a> in your releases)
 
-**NOTE:** 
-
-- Read more on [tfremote](https://github.com/tomarv2/tfremote)
-
 ## Usage
 
-Recommended method:
+### Option 1:
 
-- Create python 3.6+ virtual environment 
+```
+terrafrom init
+terraform plan -var='teamid=tryme' -var='prjid=project1'
+terraform apply -var='teamid=tryme' -var='prjid=project1'
+terraform destroy -var='teamid=tryme' -var='prjid=project1'
+```
+**Note:** With this option please take care of remote state storage
+
+### Option 2:
+
+#### Recommended method (stores remote state in S3 using `prjid` and `teamid` to create directory structure):
+
+- Create python 3.8+ virtual environment
 ```
 python3 -m venv <venv name>
 ```
 
 - Install package:
 ```
-pip install tfremote
+pip install tfremote --upgrade
 ```
 
 - Set below environment variables:
 ```
-export TF_AZURE_STORAGE_ACCOUNT=tfstatexxxxx # Output of remote_state.sh
-export TF_AZURE_CONTAINER=tfstate # Output of remote_state.sh
-export ARM_ACCESS_KEY=xxxxxxxxxx # Output of remote_state.sh
-```  
+export TF_AWS_BUCKET=<remote state bucket name>
+export TF_AWS_BUCKET_REGION=us-west-2
+export TF_AWS_PROFILE=<profile from ~/.ws/credentials>
+```
 
-- Updated `examples` directory to required values.
+or
+
+- Set below environment variables:
+```
+export TF_AWS_BUCKET=<remote state bucket name>
+export TF_AWS_BUCKET_REGION=us-west-2
+export AWS_ACCESS_KEY_ID=<aws_access_key_id>
+export AWS_SECRET_ACCESS_KEY=<aws_secret_access_key>
+```
+
+- Updated `examples` directory with required values.
 
 - Run and verify the output before deploying:
 ```
-tf -cloud azure plan -var='teamid=foo' -var='prjid=bar'
+tf -c=aws plan -var='teamid=foo' -var='prjid=bar'
 ```
 
 - Run below to deploy:
 ```
-tf -cloud azure apply -var='teamid=foo' -var='prjid=bar'
+tf -c=aws apply -var='teamid=foo' -var='prjid=bar'
 ```
 
 - Run below to destroy:
 ```
-tf -cloud azure destroy -var='teamid=foo' -var='prjid=bar'
+tf -c=aws destroy -var='teamid=foo' -var='prjid=bar'
 ```
 
+**NOTE:**
 
-> ❗️ **Important** - Two variables are required for using `tf` package:
->
-> - teamid
-> - prjid
->
-> These variables are required to set backend path in the remote storage.
-> Variables can be defined using:
->
-> - As `inline variables` e.g.: `-var='teamid=demo-team' -var='prjid=demo-project'`
-> - Inside `.tfvars` file e.g.: `-var-file=<tfvars file location> `
->
-> For more information refer to [Terraform documentation](https://www.terraform.io/docs/language/values/variables.html)
+- Read more on [tfremote](https://github.com/tomarv2/tfremote)
+---
 
 #### Function Only
 
 ```
 module "function" {
   source = "git::git@github.com:tomarv2/terraform-azure-functions.git?ref=v0.0.1"
-        
-  subscription_id = var.subscription_id
-  tenant_id       = var.tenant_id
-  client_id       = var.client_id
-  client_secret   = var.client_secret
 
-  rg_name                       = "demo_rg"
+
+  resource_group_name                       = "demo_rg"
   stg_account_key               = "1234567890A=="
   stg_account                   = "demostorage"
   stg_connection_string_for_sas = "DefaultEndpointsProtocol=https;AccountName=demostorage;AccountKey=1234567890A==;EndpointSuffix=core.windows.net"
