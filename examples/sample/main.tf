@@ -17,9 +17,8 @@ module "function" {
   resource_group_name        = var.resource_group_name
   storage_account_access_key = module.storage_account.storage_account_access_key
   storage_account_name       = module.storage_account.storage_account_name
-
-  source_dir  = "sample-functions/function-helloworld-python"
-  output_path = "/tmp/test.zip"
+  source_dir                 = "sample-functions/function-helloworld-python"
+  output_path                = "/tmp/test.zip"
   #-----------------------------------------------
   # Note: Do not change teamid and prjid once set.
   teamid = var.teamid

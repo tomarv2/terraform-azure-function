@@ -4,9 +4,5 @@ terraform {
     azurerm = {
       version = "~> 2.98"
     }
-    archive = {
-      source  = "hashicorp/archive"
-      version = "2.2.0"
-    }
   }
 }

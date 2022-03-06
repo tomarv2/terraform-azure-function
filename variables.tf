@@ -128,8 +128,7 @@ variable "archive_type" {
 
 variable "source_dir" {
   description = "Input directory path on local machine to zip"
-  #default     = null
-  type = string
+  type        = string
 }
 
 variable "output_path" {
@@ -141,4 +140,9 @@ variable "exclude_files" {
   description = "File(s) to exclude in directory from zipping"
   default     = null
   type        = list(any)
+}
+
+variable "app_settings" {
+  default     = {}
+  description = "Application settings to insert on creating the function app. Following updates will be ignored, and has to be set manually. Updates done on application deploy or in portal will not affect terraform state file."
 }
