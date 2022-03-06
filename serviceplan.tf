@@ -11,6 +11,5 @@ resource "azurerm_app_service_plan" "service_plan" {
     tier = var.service_plan_tier
     size = var.service_plan_size
   }
-
   tags = merge(local.shared_tags, var.extra_tags)
 }

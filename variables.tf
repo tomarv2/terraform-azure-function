@@ -10,79 +10,80 @@ variable "prjid" {
 
 variable "resource_group_name" {
   description = "Name of the resource group"
-  type        = string
 }
 
 variable "service_plan_kind" {
   default     = "FunctionApp"
-  description = "Service plan kind"
-  type        = string
+  description = "for Consumption Plan"
 }
 
 variable "function_os_type" {
-  description = "Operating System of the function"
-  default     = "linux"
-  type        = string
+  default = "linux"
 }
 
 variable "function_version" {
-  description = "Function version"
-  default     = "~3"
-  type        = string
+  default = "~3"
+}
+
+variable "linux_fx_version" {
+  default     = "PYTHON|3.8"
+  description = "DOCKER|docker_image:docker_image_tag"
 }
 
 variable "identity_type" {
-  description = "MSI Identity type"
-  default     = "SystemAssigned"
-  type        = string
+  default = "SystemAssigned"
 }
 
 variable "service_plan_tier" {
   default     = "Dynamic"
   description = "for Consumption Plan"
-  type        = string
 }
 
 variable "service_plan_size" {
-  description = "Service plan size"
-  default     = "Y1"
-  type        = string
+  default = "Y1"
+}
+
+variable "function_extension_version" {
+  default = "~3"
+}
+
+variable "function_worker_runtime" {
+  default = "python"
+}
+
+variable "stg_connection" {
+  type    = bool
+  default = true
 }
 
 variable "service_plan_reserved" {
-  description = "Service plan reserved, false for windows"
   type        = bool
   default     = true
-
+  description = "false for windows"
 }
 
 variable "function_enabled" {
-  description = "Function enabled"
-  type        = bool
-  default     = true
+  type    = bool
+  default = true
 }
 
 variable "function_enable_logging" {
-  description = "Function enable logging"
-  type        = bool
-  default     = true
+  type    = bool
+  default = true
 }
 
 variable "function_https_only" {
-  description = "Function https only"
-  type        = bool
-  default     = false
+  type    = bool
+  default = false
 }
+
+
 
 variable "storage_account_name" {
-  description = "Storage account name"
-  type        = string
+  description = "storage account name"
 }
 
-variable "storage_account_access_key" {
-  description = "Storage account access key"
-  type        = string
-}
+variable "storage_account_access_key" {}
 
 variable "deploy_function" {
   description = "Feature flag, true or false"
@@ -97,15 +98,22 @@ variable "deploy_service_plan" {
 }
 
 variable "service_plan_name" {
-  description = "Service plan name"
-  default     = null
-  type        = string
+  default = null
 }
 
 variable "function_app_name" {
-  description = "Function app name"
-  default     = null
-  type        = string
+  default = null
+}
+
+variable "storage_account_container_name" {}
+
+variable "archive_type" {
+  default = "zip"
+}
+
+variable "app_settings" {
+  default     = {}
+  description = "Application settings to insert on creating the function app. Following updates will be ignored, and has to be set manually. Updates done on application deploy or in portal will not affect terraform state file."
 }
 
 variable "location" {
@@ -118,12 +126,6 @@ variable "extra_tags" {
   description = "Additional tags to associate"
   type        = map(string)
   default     = {}
-}
-
-variable "archive_type" {
-  description = "Archive type"
-  default     = "zip"
-  type        = string
 }
 
 variable "source_dir" {
@@ -140,9 +142,4 @@ variable "exclude_files" {
   description = "File(s) to exclude in directory from zipping"
   default     = null
   type        = list(any)
-}
-
-variable "app_settings" {
-  default     = {}
-  description = "Application settings to insert on creating the function app. Following updates will be ignored, and has to be set manually. Updates done on application deploy or in portal will not affect terraform state file."
 }
