@@ -81,7 +81,6 @@ _testmain.go
 
 # Python
 # Editors
-.vscode/
 
 # Vagrant
 .vagrant/

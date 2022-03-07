@@ -19,7 +19,7 @@ variable "service_plan_kind" {
   type        = string
 }
 
-variable "function_os_type" {
+variable "os_type" {
   description = "Operating System of the function"
   default     = "linux"
   type        = string
@@ -27,8 +27,8 @@ variable "function_os_type" {
 
 variable "function_version" {
   description = "Function version"
-  default     = "~3"
-  type        = string
+  default     = 3
+  type        = number
 }
 
 variable "identity_type" {
@@ -39,7 +39,7 @@ variable "identity_type" {
 
 variable "service_plan_tier" {
   default     = "Dynamic"
-  description = "for Consumption Plan"
+  description = "For Consumption Plan"
   type        = string
 }
 
@@ -56,19 +56,19 @@ variable "service_plan_reserved" {
 
 }
 
-variable "function_enabled" {
+variable "enabled" {
   description = "Function enabled"
   type        = bool
   default     = true
 }
 
-variable "function_enable_logging" {
+variable "enable_logging" {
   description = "Function enable logging"
   type        = bool
   default     = true
 }
 
-variable "function_https_only" {
+variable "https_only" {
   description = "Function https only"
   type        = bool
   default     = false
@@ -102,7 +102,7 @@ variable "service_plan_name" {
   type        = string
 }
 
-variable "function_app_name" {
+variable "name" {
   description = "Function app name"
   default     = null
   type        = string
@@ -145,4 +145,10 @@ variable "exclude_files" {
 variable "app_settings" {
   default     = {}
   description = "Application settings to insert on creating the function app. Following updates will be ignored, and has to be set manually. Updates done on application deploy or in portal will not affect terraform state file."
+}
+
+variable "identity_ids" {
+  description = "UserAssigned Identities ID to add to Function App. Mandatory if type is UserAssigned"
+  type        = list(string)
+  default     = null
 }
