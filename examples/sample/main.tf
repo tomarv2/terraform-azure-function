@@ -29,7 +29,7 @@ module "function" {
 }
 
 module "app_insights" {
-  source = "git::git@github.com:tomarv2/terraform-azure-application-insights.git"
+  source = "git::git@github.com:tomarv2/terraform-azure-application-insights.git?ref=v0.0.6"
 
   resource_group_name = var.resource_group_name
   location            = var.location
@@ -40,7 +40,7 @@ module "app_insights" {
 }
 
 module "storage_account" {
-  source = "git::git@github.com:tomarv2/terraform-azure-storage-account.git//modules/account"
+  source = "git::git@github.com:tomarv2/terraform-azure-storage-account.git//modules/account?ref=v0.0.9"
 
   resource_group_name = var.resource_group_name
   location            = var.location
@@ -51,7 +51,7 @@ module "storage_account" {
 }
 
 module "storage_container" {
-  source = "git::git@github.com:tomarv2/terraform-azure-storage-account.git//modules/container"
+  source = "git::git@github.com:tomarv2/terraform-azure-storage-account.git//modules/container?ref=v0.0.9"
 
   container_names      = [var.container_name]
   storage_account_name = module.storage_account.storage_account_name
@@ -62,7 +62,7 @@ module "storage_container" {
 }
 
 module "storage_blob" {
-  source = "git::git@github.com:tomarv2/terraform-azure-storage-account.git//modules/blob"
+  source = "git::git@github.com:tomarv2/terraform-azure-storage-account.git//modules/blob?ref=v0.0.9"
 
   blob_name              = "example"
   blob_source            = "example.txt"

@@ -1,3 +1,4 @@
+/*
 data "archive_file" "zip_dir" {
   count = var.source_dir != null ? 1 : 0
 
@@ -6,3 +7,4 @@ data "archive_file" "zip_dir" {
   output_path = var.output_path
   excludes    = var.exclude_files
 }
+*/

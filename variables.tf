@@ -119,7 +119,7 @@ variable "extra_tags" {
   type        = map(string)
   default     = {}
 }
-
+/*
 variable "archive_type" {
   description = "Archive type"
   default     = "zip"
@@ -147,7 +147,7 @@ variable "app_settings" {
   default     = {}
   description = "Application settings to insert on creating the function app. Following updates will be ignored, and has to be set manually. Updates done on application deploy or in portal will not affect terraform state file."
 }
-
+*/
 variable "identity_ids" {
   description = "UserAssigned Identities ID to add to Function App. Mandatory if type is UserAssigned"
   type        = list(string)
