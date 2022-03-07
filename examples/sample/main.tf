@@ -12,13 +12,27 @@ provider "azurerm" {
 }
 
 module "function" {
-  source                     = "../../"
-  location                   = var.location
-  resource_group_name        = var.resource_group_name
-  storage_account_access_key = module.storage_account.storage_account_access_key
-  storage_account_name       = module.storage_account.storage_account_name
-  source_dir                 = "sample-functions/function-helloworld-python"
-  output_path                = "/tmp/test.zip"
+  source = "../../"
+
+  location                        = var.location
+  resource_group_name             = var.resource_group_name
+  storage_account_access_key      = module.storage_account.storage_account_access_key
+  storage_account_name            = module.storage_account.storage_account_name
+  source_dir                      = "sample-functions/function-helloworld-python"
+  output_path                     = "/tmp/test.zip"
+  app_insights_intrumentation_key = module.app_insights.instrumentation_key
+  app_insights_connection_string  = module.app_insights.connection_string
+  #-----------------------------------------------
+  # Note: Do not change teamid and prjid once set.
+  teamid = var.teamid
+  prjid  = var.prjid
+}
+
+module "app_insights" {
+  source = "git::git@github.com:tomarv2/terraform-azure-application-insights.git"
+
+  resource_group_name = var.resource_group_name
+  location            = var.location
   #-----------------------------------------------
   # Note: Do not change teamid and prjid once set.
   teamid = var.teamid

@@ -32,3 +32,18 @@ output "storage_account_access_key" {
   description = "Storage account access key"
   value       = nonsensitive(module.storage_account.storage_account_access_key)
 }
+
+output "app_insights_instrumentation_key" {
+  description = "Application Insights Instrumentation key"
+  value       = module.app_insights.instrumentation_key
+}
+
+output "app_insights_app_id" {
+  description = "Application Insights Id"
+  value       = module.app_insights.app_id
+}
+
+output "app_insights_connection_string" {
+  description = "Application Insights connection string"
+  value       = module.app_insights.connection_string
+}

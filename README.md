@@ -151,13 +151,14 @@ Please refer to examples directory [link](examples) for references.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.1 |
+| <a name="requirement_archive"></a> [archive](#requirement\_archive) | 2.2.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 2.98 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_archive"></a> [archive](#provider\_archive) | n/a |
+| <a name="provider_archive"></a> [archive](#provider\_archive) | 2.2.0 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 2.98 |
 
 ## Modules
@@ -170,26 +171,29 @@ No modules.
 |------|------|
 | [azurerm_app_service_plan.service_plan](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service_plan) | resource |
 | [azurerm_function_app.func_app](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/function_app) | resource |
-| [archive_file.zip_dir](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
+| [archive_file.zip_dir](https://registry.terraform.io/providers/hashicorp/archive/2.2.0/docs/data-sources/file) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_app_settings"></a> [app\_settings](#input\_app\_settings) | Application settings to insert on creating the function app. Following updates will be ignored, and has to be set manually. Updates done on application deploy or in portal will not affect terraform state file. | `map` | `{}` | no |
+| <a name="input_app_insights_connection_string"></a> [app\_insights\_connection\_string](#input\_app\_insights\_connection\_string) | Connection string of the existing Application Insights | `string` | `null` | no |
+| <a name="input_app_insights_intrumentation_key"></a> [app\_insights\_intrumentation\_key](#input\_app\_insights\_intrumentation\_key) | Instrumentation key of the existing Application Insights | `string` | `null` | no |
+| <a name="input_app_settings"></a> [app\_settings](#input\_app\_settings) | Application settings to insert on creating the function app. Following updates will be ignored, and has to be set manually. Updates done on application deploy or in portal will not affect terraform state file. | `map(any)` | `{}` | no |
 | <a name="input_archive_type"></a> [archive\_type](#input\_archive\_type) | Archive type | `string` | `"zip"` | no |
 | <a name="input_deploy_function"></a> [deploy\_function](#input\_deploy\_function) | Feature flag, true or false | `bool` | `true` | no |
 | <a name="input_deploy_service_plan"></a> [deploy\_service\_plan](#input\_deploy\_service\_plan) | Feature flag, true or false | `bool` | `true` | no |
+| <a name="input_enable_logging"></a> [enable\_logging](#input\_enable\_logging) | Function enable logging | `bool` | `true` | no |
+| <a name="input_enabled"></a> [enabled](#input\_enabled) | Function enabled | `bool` | `true` | no |
 | <a name="input_exclude_files"></a> [exclude\_files](#input\_exclude\_files) | File(s) to exclude in directory from zipping | `list(any)` | `null` | no |
 | <a name="input_extra_tags"></a> [extra\_tags](#input\_extra\_tags) | Additional tags to associate | `map(string)` | `{}` | no |
-| <a name="input_name"></a> [function\_app\_name](#input\_function\_app\_name) | Function app name | `string` | `null` | no |
-| <a name="input_enable_logging"></a> [function\_enable\_logging](#input\_function\_enable\_logging) | Function enable logging | `bool` | `true` | no |
-| <a name="input_enabled"></a> [function\_enabled](#input\_function\_enabled) | Function enabled | `bool` | `true` | no |
-| <a name="input_https_only"></a> [function\_https\_only](#input\_function\_https\_only) | Function https only | `bool` | `false` | no |
-| <a name="input_os_type"></a> [function\_os\_type](#input\_function\_os\_type) | Operating System of the function | `string` | `"linux"` | no |
-| <a name="input_version"></a> [function\_version](#input\_function\_version) | Function version | `string` | `"~3"` | no |
+| <a name="input_function_version"></a> [function\_version](#input\_function\_version) | Function version | `number` | `3` | no |
+| <a name="input_https_only"></a> [https\_only](#input\_https\_only) | Function https only | `bool` | `false` | no |
+| <a name="input_identity_ids"></a> [identity\_ids](#input\_identity\_ids) | UserAssigned Identities ID to add to Function App. Mandatory if type is UserAssigned | `list(string)` | `null` | no |
 | <a name="input_identity_type"></a> [identity\_type](#input\_identity\_type) | MSI Identity type | `string` | `"SystemAssigned"` | no |
 | <a name="input_location"></a> [location](#input\_location) | The location/region where the resource is created | `string` | `"westus2"` | no |
+| <a name="input_name"></a> [name](#input\_name) | Function app name | `string` | `null` | no |
+| <a name="input_os_type"></a> [os\_type](#input\_os\_type) | Operating System of the function | `string` | `"linux"` | no |
 | <a name="input_output_path"></a> [output\_path](#input\_output\_path) | Output file path on local machine to deploy to lambda | `string` | n/a | yes |
 | <a name="input_prjid"></a> [prjid](#input\_prjid) | Name of the project/stack e.g: mystack, nifieks, demoaci. Should not be changed after running 'tf apply' | `string` | n/a | yes |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | Name of the resource group | `string` | n/a | yes |
@@ -197,7 +201,8 @@ No modules.
 | <a name="input_service_plan_name"></a> [service\_plan\_name](#input\_service\_plan\_name) | Service plan name | `string` | `null` | no |
 | <a name="input_service_plan_reserved"></a> [service\_plan\_reserved](#input\_service\_plan\_reserved) | Service plan reserved, false for windows | `bool` | `true` | no |
 | <a name="input_service_plan_size"></a> [service\_plan\_size](#input\_service\_plan\_size) | Service plan size | `string` | `"Y1"` | no |
-| <a name="input_service_plan_tier"></a> [service\_plan\_tier](#input\_service\_plan\_tier) | for Consumption Plan | `string` | `"Dynamic"` | no |
+| <a name="input_service_plan_tier"></a> [service\_plan\_tier](#input\_service\_plan\_tier) | For Consumption Plan | `string` | `"Dynamic"` | no |
+| <a name="input_site_config"></a> [site\_config](#input\_site\_config) | Site config for App Service. See documentation https://www.terraform.io/docs/providers/azurerm/r/app_service.html#site_config. IP restriction attribute is not managed in this block. | `any` | `{}` | no |
 | <a name="input_source_dir"></a> [source\_dir](#input\_source\_dir) | Input directory path on local machine to zip | `string` | n/a | yes |
 | <a name="input_storage_account_access_key"></a> [storage\_account\_access\_key](#input\_storage\_account\_access\_key) | Storage account access key | `string` | n/a | yes |
 | <a name="input_storage_account_name"></a> [storage\_account\_name](#input\_storage\_account\_name) | Storage account name | `string` | n/a | yes |
@@ -207,5 +212,5 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_app_service_name"></a> [app\_service\_name](#output\_app\_service\_name) | n/a |
-| <a name="output_azurerm_function_app"></a> [azurerm\_function\_app](#output\_azurerm\_function\_app) | n/a |
+| <a name="output_app_service_name"></a> [app\_service\_name](#output\_app\_service\_name) | Application service plan name |
+| <a name="output_azurerm_function_app"></a> [azurerm\_function\_app](#output\_azurerm\_function\_app) | Application function name |

@@ -143,6 +143,7 @@ variable "exclude_files" {
 }
 
 variable "app_settings" {
+  type        = map(any)
   default     = {}
   description = "Application settings to insert on creating the function app. Following updates will be ignored, and has to be set manually. Updates done on application deploy or in portal will not affect terraform state file."
 }
@@ -151,4 +152,21 @@ variable "identity_ids" {
   description = "UserAssigned Identities ID to add to Function App. Mandatory if type is UserAssigned"
   type        = list(string)
   default     = null
+}
+
+variable "app_insights_intrumentation_key" {
+  description = "Instrumentation key of the existing Application Insights"
+  type        = string
+  default     = null
+}
+variable "app_insights_connection_string" {
+  description = "Connection string of the existing Application Insights"
+  type        = string
+  default     = null
+}
+
+variable "site_config" {
+  description = "Site config for App Service. See documentation https://www.terraform.io/docs/providers/azurerm/r/app_service.html#site_config. IP restriction attribute is not managed in this block."
+  type        = any
+  default     = {}
 }
