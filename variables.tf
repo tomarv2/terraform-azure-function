@@ -8,109 +8,14 @@ variable "prjid" {
   type        = string
 }
 
-variable "resource_group_name" {
-  description = "Name of the resource group"
-  type        = string
-}
-
-variable "service_plan_kind" {
-  default     = "FunctionApp"
-  description = "Service plan kind"
-  type        = string
-}
-
-variable "os_type" {
-  description = "Operating System of the function"
-  default     = "linux"
-  type        = string
-}
-
-variable "function_version" {
-  description = "Function version"
-  default     = 3
-  type        = number
+variable "service_plan_id" {
+  description = "The ID of the App Service Plan within which to create this Function App."
+  default = null
 }
 
 variable "identity_type" {
-  description = "MSI Identity type"
+  description = "Specifies the identity type of the Function App. Possible values are SystemAssigned (where Azure will generate a Service Principal for you), UserAssigned where you can specify the Service Principal IDs in the identity_ids field, and SystemAssigned, UserAssigned which assigns both a system managed identity as well as the specified user assigned identities."
   default     = "SystemAssigned"
-  type        = string
-}
-
-variable "service_plan_tier" {
-  default     = "Dynamic"
-  description = "For Consumption Plan"
-  type        = string
-}
-
-variable "service_plan_size" {
-  description = "Service plan size"
-  default     = "Y1"
-  type        = string
-}
-
-variable "service_plan_reserved" {
-  description = "Service plan reserved, false for windows"
-  type        = bool
-  default     = true
-
-}
-
-variable "enabled" {
-  description = "Function enabled"
-  type        = bool
-  default     = true
-}
-
-variable "enable_logging" {
-  description = "Function enable logging"
-  type        = bool
-  default     = true
-}
-
-variable "https_only" {
-  description = "Function https only"
-  type        = bool
-  default     = false
-}
-
-variable "storage_account_name" {
-  description = "Storage account name"
-  type        = string
-}
-
-variable "storage_account_access_key" {
-  description = "Storage account access key"
-  type        = string
-}
-
-variable "deploy_function" {
-  description = "Feature flag, true or false"
-  default     = true
-  type        = bool
-}
-
-variable "deploy_service_plan" {
-  description = "Feature flag, true or false"
-  default     = true
-  type        = bool
-}
-
-variable "service_plan_name" {
-  description = "Service plan name"
-  default     = null
-  type        = string
-}
-
-variable "name" {
-  description = "Function app name"
-  default     = null
-  type        = string
-}
-
-variable "location" {
-  description = " The location/region where the resource is created"
-  default     = "westus2"
   type        = string
 }
 
@@ -119,49 +24,10 @@ variable "extra_tags" {
   type        = map(string)
   default     = {}
 }
-/*
-variable "archive_type" {
-  description = "Archive type"
-  default     = "zip"
-  type        = string
-}
 
-variable "source_dir" {
-  description = "Input directory path on local machine to zip"
-  type        = string
-}
-
-variable "output_path" {
-  description = "Output file path on local machine to deploy to lambda"
-  type        = string
-}
-
-variable "exclude_files" {
-  description = "File(s) to exclude in directory from zipping"
-  default     = null
-  type        = list(any)
-}
-
-variable "app_settings" {
-  type        = map(any)
-  default     = {}
-  description = "Application settings to insert on creating the function app. Following updates will be ignored, and has to be set manually. Updates done on application deploy or in portal will not affect terraform state file."
-}
-*/
 variable "identity_ids" {
-  description = "UserAssigned Identities ID to add to Function App. Mandatory if type is UserAssigned"
+  description = "Specifies a list of user managed identity ids to be assigned. Required if type is UserAssigned."
   type        = list(string)
-  default     = null
-}
-
-variable "app_insights_intrumentation_key" {
-  description = "Instrumentation key of the existing Application Insights"
-  type        = string
-  default     = null
-}
-variable "app_insights_connection_string" {
-  description = "Connection string of the existing Application Insights"
-  type        = string
   default     = null
 }
 

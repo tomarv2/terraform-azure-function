@@ -14,13 +14,4 @@ variable "location" {
   type        = string
 }
 
-variable "resource_group_name" {
-  description = " The name of the resource group"
-  type        = string
-}
-
-variable "container_name" {
-  description = " Storage container name"
-  type        = string
-  default     = "example"
-}
+variable "resource_group" {}
