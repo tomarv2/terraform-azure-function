@@ -2,7 +2,7 @@ terraform {
   required_version = ">= 1.0.1"
   required_providers {
     azurerm = {
-      version = "~> 2.98"
+      version = "~> 3.21.1"
     }
   }
 }
@@ -11,61 +11,32 @@ provider "azurerm" {
   features {}
 }
 
+resource "azurerm_service_plan" "service_plan" {
+  name                = "<service_plan_name>"
+  location            = var.location
+  resource_group_name = "<resource group name>"
+  os_type             = "Linux"
+  sku_name            = "P1v2"
+}
+
+
 module "function" {
   source = "../../"
-
-  location                        = var.location
-  resource_group_name             = var.resource_group_name
-  storage_account_access_key      = module.storage_account.storage_account_access_key
-  storage_account_name            = module.storage_account.storage_account_name
-  source_dir                      = "sample-functions/function-helloworld-python"
-  output_path                     = "/tmp/test.zip"
-  app_insights_intrumentation_key = module.app_insights.instrumentation_key
-  app_insights_connection_string  = module.app_insights.connection_string
+  function_apps_config = {
+    "<function_name>" = {
+      location                   = var.location
+      resource_group             = "<resource group name>"
+      storage_account_access_key = "<storage_access_key>"
+      storage_account_name       = "<storage_name>"
+      service_plan_id            = azurerm_service_plan.service_plan.id
+      app_settings = {
+        app_insights_instrumentation_key = "<instrumentation_key>"
+        app_insights_connection_string   = "<connection_string>"
+      }
+    }
+  }
   #-----------------------------------------------
   # Note: Do not change teamid and prjid once set.
   teamid = var.teamid
   prjid  = var.prjid
-}
-
-module "app_insights" {
-  source = "git::git@github.com:tomarv2/terraform-azure-application-insights.git?ref=v0.0.6"
-
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  #-----------------------------------------------
-  # Note: Do not change teamid and prjid once set.
-  teamid = var.teamid
-  prjid  = var.prjid
-}
-
-module "storage_account" {
-  source = "git::git@github.com:tomarv2/terraform-azure-storage-account.git//modules/account?ref=v0.0.9"
-
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  #-----------------------------------------------
-  # Note: Do not change teamid and prjid once set.
-  teamid = var.teamid
-  prjid  = var.prjid
-}
-
-module "storage_container" {
-  source = "git::git@github.com:tomarv2/terraform-azure-storage-account.git//modules/container?ref=v0.0.9"
-
-  container_names      = [var.container_name]
-  storage_account_name = module.storage_account.storage_account_name
-  #-----------------------------------------------
-  # Note: Do not change teamid and prjid once set.
-  teamid = var.teamid
-  prjid  = var.prjid
-}
-
-module "storage_blob" {
-  source = "git::git@github.com:tomarv2/terraform-azure-storage-account.git//modules/blob?ref=v0.0.9"
-
-  blob_name              = "example"
-  blob_source            = "example.txt"
-  storage_container_name = var.container_name
-  storage_account_name   = module.storage_account.storage_account_name
 }
