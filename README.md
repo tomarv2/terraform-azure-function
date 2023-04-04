@@ -9,8 +9,8 @@
         <img src="https://img.shields.io/github/commit-activity/m/tomarv2/terraform-azure-functions" /></a>
     <a href="https://stackoverflow.com/users/6679867/tomarv2" alt="Stack Exchange reputation">
         <img src="https://img.shields.io/stackexchange/stackoverflow/r/6679867"></a>
-    <a href="https://twitter.com/intent/follow?screen_name=varuntomar2019" alt="follow on Twitter">
-        <img src="https://img.shields.io/twitter/follow/varuntomar2019?style=social&logo=twitter"></a>
+    <a href="https://twitter.com/intent/follow?screen_name=tomar_v2" alt="follow on Twitter">
+        <img src="https://img.shields.io/twitter/follow/tomar_v2?style=social&logo=twitter"></a>
 </p>
 
 ## Terraform module for [Azure Functions](https://registry.terraform.io/modules/tomarv2/functions/azure/latest)
@@ -105,7 +105,7 @@ resource "azurerm_service_plan" "service_plan" {
 
 module "function" {
   source = "../../"
-  function_apps_config = {
+  config = {
     "<function_name>" = {
       location                   = var.location
       resource_group             = "<resource group name>"
@@ -157,14 +157,8 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_config"></a> [config](#input\_config) | Azure Function app configuration | `map(any)` | n/a | yes |
 | <a name="input_extra_tags"></a> [extra\_tags](#input\_extra\_tags) | Additional tags to associate | `map(string)` | `{}` | no |
-| <a name="input_function_apps_config"></a> [function\_apps\_config](#input\_function\_apps\_config) | n/a | `any` | n/a | yes |
-| <a name="input_identity_ids"></a> [identity\_ids](#input\_identity\_ids) | Specifies a list of user managed identity ids to be assigned. Required if type is UserAssigned. | `list(string)` | `null` | no |
-| <a name="input_identity_type"></a> [identity\_type](#input\_identity\_type) | Specifies the identity type of the Function App. Possible values are SystemAssigned (where Azure will generate a Service Principal for you), UserAssigned where you can specify the Service Principal IDs in the identity\_ids field, and SystemAssigned, UserAssigned which assigns both a system managed identity as well as the specified user assigned identities. | `string` | `"SystemAssigned"` | no |
-| <a name="input_prjid"></a> [prjid](#input\_prjid) | Name of the project/stack e.g: mystack, nifieks, demoaci. Should not be changed after running 'tf apply' | `string` | n/a | yes |
-| <a name="input_service_plan_id"></a> [service\_plan\_id](#input\_service\_plan\_id) | The ID of the App Service Plan within which to create this Function App. | `any` | `null` | no |
-| <a name="input_site_config"></a> [site\_config](#input\_site\_config) | Site config for App Service. See documentation https://www.terraform.io/docs/providers/azurerm/r/app_service.html#site_config. IP restriction attribute is not managed in this block. | `any` | `{}` | no |
-| <a name="input_teamid"></a> [teamid](#input\_teamid) | Name of the team/group e.g. devops, dataengineering. Should not be changed after running 'tf apply' | `string` | n/a | yes |
 
 ## Outputs
 

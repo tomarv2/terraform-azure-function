@@ -22,7 +22,7 @@ resource "azurerm_service_plan" "service_plan" {
 
 module "function" {
   source = "../../"
-  function_apps_config = {
+  config = {
     "<function_name>" = {
       location                   = var.location
       resource_group             = "<resource group name>"
@@ -35,8 +35,4 @@ module "function" {
       }
     }
   }
-  #-----------------------------------------------
-  # Note: Do not change teamid and prjid once set.
-  teamid = var.teamid
-  prjid  = var.prjid
 }
