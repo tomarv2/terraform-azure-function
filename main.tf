@@ -1,7 +1,5 @@
-variable "function_apps_config" {}
-
 resource "azurerm_linux_function_app" "func_app" {
-  for_each = var.function_apps_config != null ? var.function_apps_config : {}
+  for_each = var.config
 
   name                = each.key
   location            = try(each.value.location, "westus2")
@@ -27,7 +25,7 @@ resource "azurerm_linux_function_app" "func_app" {
   }
 
   dynamic "site_config" {
-    for_each = [var.site_config]
+    for_each = [each.value.site_config]
     content {
       always_on                   = lookup(site_config.value, "always_on", null)
       ftps_state                  = lookup(site_config.value, "ftps_state", null)
